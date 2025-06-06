@@ -1,275 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Ultimate Random Picker Tool</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 30px;
-    background: #f0f8ff;
-  }
-  #wheel {
-    margin: 0 auto;
-    display: block;
-  }
-  #spin {
-    margin-top: 20px;
-    font-size: 18px;
-    padding: 12px 30px;
-    cursor: pointer;
-    background: #4CAF50;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    transition: background 0.3s;
-  }
-  #spin:hover {
-    background: #45a049;
-  }
-  textarea {
-    width: 300px;
-    height: 80px;
-    margin-top: 20px;
-    font-size: 14px;
-  }
-  select {
-    font-size: 16px;
-    padding: 5px;
-    margin-top: 15px;
-  }
-  #confetti-canvas {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    pointer-events: none;
-    z-index: 9999;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FunToSpin - Random Wheel Spinner</title>
+  <meta name="description" content="FunToSpin is a fun and easy random wheel spinner for decision making, games, raffles, and more. Customize your own spinner wheel instantly!" />
+  <meta name="keywords" content="spinner wheel, random wheel, decision maker, fun wheel, spin wheel online, raffle wheel, wheel of names, wheel spinner tool" />
+  <link rel="icon" href="/assets/favicon.ico" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      background: #f0f8ff;
+      color: #333;
+      margin: 0;
+    }
+    #wheel {
+      margin: 20px auto;
+      display: block;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      background: white;
+    }
+    #spin {
+      margin-top: 20px;
+      font-size: 18px;
+      padding: 12px 30px;
+      cursor: pointer;
+      background: #4CAF50;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    #spin:hover {
+      background: #45a049;
+    }
+    textarea {
+      width: 300px;
+      height: 80px;
+      margin-top: 20px;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      padding: 8px;
+      resize: vertical;
+    }
+    select {
+      font-size: 16px;
+      padding: 5px;
+      margin-top: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    section#about {
+      max-width: 700px;
+      margin: 40px auto;
+      text-align: left;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    section#about h2, section#about h3 {
+      color: #4CAF50;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Make Fair Decisions, the Fun Way</h1>
+  <h1>Make Fair Decisions, the Fun Way</h1>
 
-<label for="presetWheels">Choose a preset wheel:</label><br />
-<select id="presetWheels">
-  <option value="">-- Select Preset --</option>
-  <option value="fruits">Fruits</option>
-  <option value="colors">Colors</option>
-  <option value="party">Party Activities</option>
-</select>
+  <label for="presetWheels">Choose a preset wheel:</label><br />
+  <select id="presetWheels">
+    <option value="">-- Select Preset --</option>
+  </select><br />
 
-<br />
+  <label for="customOptions">Or enter your own options, separated by commas:</label><br />
+  <textarea id="customOptions" placeholder="e.g. Pizza, Burger, Salad"></textarea><br />
 
-<label for="customOptions">Or enter your own options, separated by commas:</label><br />
-<textarea id="customOptions" placeholder="e.g. Pizza, Burger, Salad"></textarea><br />
+  <button id="loadWheel">Load Wheel</button>
+  <button id="spin">Spin the Wheel</button>
 
-<button id="loadWheel">Load Wheel</button>
-<button id="spin">Spin the Wheel</button>
+  <canvas id="wheel" width="400" height="400"></canvas>
+  <canvas id="confetti-canvas"></canvas>
 
-<canvas id="wheel" width="400" height="400"></canvas>
-<canvas id="confetti-canvas"></canvas>
+  <section id="about">
+    <h2>About FunToSpin</h2>
+    <p>
+      FunToSpin is a simple and entertaining online random wheel spinner designed to help you make fair decisions easily.
+      Whether you want to choose a meal, pick a game, select a winner for a raffle, or decide on any option, FunToSpin lets you
+      customize your own spinning wheel instantly. Just enter your options or select from preset wheels, spin, and enjoy!
+    </p>
+    <h3>How to Use FunToSpin</h3>
+    <ol>
+      <li>Select a preset wheel from the dropdown menu or enter your own options separated by commas.</li>
+      <li>Click the <strong>Load Wheel</strong> button to generate the spinner.</li>
+      <li>Press <strong>Spin the Wheel</strong> to let chance decide your outcome.</li>
+    </ol>
+    <h3>Why Use FunToSpin?</h3>
+    <ul>
+      <li><strong>Fair and unbiased:</strong> The wheel spins randomly to give everyone an equal chance.</li>
+      <li><strong>Customizable:</strong> Create your own wheels for any occasion or need.</li>
+      <li><strong>Fun experience:</strong> Colorful graphics, sound effects, and confetti make decision-making enjoyable.</li>
+      <li><strong>No sign-up required:</strong> Instant access from any device with an internet connection.</li>
+    </ul>
+    <p>
+      Perfect for classrooms, parties, family decisions, or just when you can’t decide! Try FunToSpin today and make every choice fun.
+    </p>
+  </section>
 
-<script>
-// Confetti setup
-const confettiCanvas = document.getElementById('confetti-canvas');
-const confettiCtx = confettiCanvas.getContext('2d');
-confettiCanvas.width = window.innerWidth;
-confettiCanvas.height = window.innerHeight;
+  <script>
+    // --- Preset wheels data ---
+    const presetWheels = {
+      fruits: ["Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape", "Honeydew"],
+      colors: ["Red", "Blue", "Green", "Yellow", "Purple", "Orange"],
+      party: ["Dance", "Sing", "Tell a joke", "Do 10 push-ups", "Share a secret", "High five"],
+      movies: ["Inception", "Avatar", "Titanic", "The Matrix", "Interstellar", "Gladiator"],
+      weekdays: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+      icecreams: ["Vanilla", "Chocolate", "Strawberry", "Mint", "Cookie Dough", "Pistachio"]
+    };
 
-class ConfettiParticle {
-  constructor() {
-    this.x = Math.random() * confettiCanvas.width;
-    this.y = Math.random() * confettiCanvas.height - confettiCanvas.height;
-    this.size = Math.random() * 8 + 4;
-    this.speed = Math.random() * 3 + 2;
-    this.angle = Math.random() * 2 * Math.PI;
-    this.spin = (Math.random() - 0.5) * 0.1;
-    this.color = `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
-  }
-  update() {
-    this.y += this.speed;
-    this.angle += this.spin;
-    if (this.y > confettiCanvas.height) {
-      this.y = -this.size;
-      this.x = Math.random() * confettiCanvas.width;
+    // --- Populate preset dropdown ---
+    const presetSelect = document.getElementById('presetWheels');
+    function populatePresetOptions() {
+      Object.keys(presetWheels).forEach(key => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = key.charAt(0).toUpperCase() + key.slice(1);
+        presetSelect.appendChild(option);
+      });
     }
-  }
-  draw() {
-    confettiCtx.save();
-    confettiCtx.translate(this.x, this.y);
-    confettiCtx.rotate(this.angle);
-    confettiCtx.fillStyle = this.color;
-    confettiCtx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
-    confettiCtx.restore();
-  }
-}
+    populatePresetOptions();
 
-let confettiParticles = [];
-function startConfetti() {
-  confettiParticles = [];
-  for (let i = 0; i < 150; i++) {
-    confettiParticles.push(new ConfettiParticle());
-  }
-  confettiLoop();
-}
+    // Canvas setup
+    const canvas = document.getElementById('wheel');
+    const ctx = canvas.getContext('2d');
+    const size = canvas.width;
+    const center = size / 2;
 
-function confettiLoop() {
-  confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-  confettiParticles.forEach(p => {
-    p.update();
-    p.draw();
-  });
-  if (confettiParticles.length > 0) {
-    requestAnimationFrame(confettiLoop);
-  }
-}
-function stopConfetti() {
-  confettiParticles = [];
-  confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-}
+    let segments = [];
+    let segmentCount = 0;
+    let segmentAngle = 0;
+    let startAngle = 0;
+    let isSpinning = false;
+    let spinAngle = 0;
+    let spinVelocity = 0;
 
-// Wheel & Spin Logic
+    // Sounds
+    const spinSound = new Audio('https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg');
+    const winSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
 
-const canvas = document.getElementById('wheel');
-const ctx = canvas.getContext('2d');
-const size = canvas.width;
-const center = size / 2;
-let segments = [];
-let segmentCount = 0;
-let segmentAngle = 0;
-let startAngle = 0;
-let isSpinning = false;
-let spinAngle = 0;
-let spinVelocity = 0;
+    // Confetti setup
+    const confettiCanvas = document.getElementById('confetti-canvas');
+    const confettiCtx = confettiCanvas.getContext('2d');
+    confettiCanvas.width = window.innerWidth;
+    confettiCanvas.height = window.innerHeight;
 
-// Sound
-const spinSound = new Audio('https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg');
-const winSound = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg');
-
-function drawWheel() {
-  ctx.clearRect(0, 0, size, size);
-  for (let i = 0; i < segmentCount; i++) {
-    ctx.beginPath();
-    ctx.moveTo(center, center);
-    ctx.arc(center, center, center - 10, startAngle + i * segmentAngle, startAngle + (i + 1) * segmentAngle);
-    ctx.fillStyle = i % 2 === 0 ? '#FFCE54' : '#FC6E51';
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.save();
-    ctx.translate(center, center);
-    ctx.rotate(startAngle + i * segmentAngle + segmentAngle / 2);
-    ctx.textAlign = "right";
-    ctx.fillStyle = "#000";
-    ctx.font = "bold 16px Arial";
-    ctx.fillText(segments[i], center - 20, 10);
-    ctx.restore();
-  }
-
-  // Center circle
-  ctx.beginPath();
-  ctx.arc(center, center, 30, 0, 2 * Math.PI);
-  ctx.fillStyle = "#FFF";
-  ctx.fill();
-  ctx.lineWidth = 2;
-  ctx.stroke();
-
-  // Pointer
-  ctx.fillStyle = "red";
-  ctx.beginPath();
-  ctx.moveTo(center, 10);
-  ctx.lineTo(center - 15, 40);
-  ctx.lineTo(center + 15, 40);
-  ctx.closePath();
-  ctx.fill();
-}
-
-function spin() {
-  if (isSpinning) return;
-  if (segmentCount === 0) {
-    alert("Load a wheel first!");
-    return;
-  }
-  isSpinning = true;
-  spinSound.play();
-
-  spinVelocity = Math.random() * 0.3 + 0.4;
-
-  function animate() {
-    spinAngle += spinVelocity;
-    spinVelocity *= 0.97;
-
-    startAngle = spinAngle % (2 * Math.PI);
-    drawWheel();
-
-    if (spinVelocity > 0.002) {
-      requestAnimationFrame(animate);
-    } else {
-      isSpinning = false;
-      winSound.play();
-
-      // Fixed segment selection logic:
-      const pointerAngle = (2 * Math.PI - startAngle + segmentAngle / 2) % (2 * Math.PI);
-      let selectedIndex = Math.floor(pointerAngle / segmentAngle);
-      selectedIndex = (segmentCount - 1 - selectedIndex + segmentCount) % segmentCount;
-
-    //   # following logic not working - leave it for now
-    //   alert(`You got: ${segments[selectedIndex]}`);
-
-
-      startConfetti();
-      setTimeout(stopConfetti, 4000);
+    class ConfettiParticle {
+      constructor() {
+        this.x = Math.random() * confettiCanvas.width;
+        this.y = Math.random() * confettiCanvas.height - confettiCanvas.height;
+        this.size = Math.random() * 8 + 4;
+        this.speed = Math.random() * 3 + 2;
+        this.angle = Math.random() * 2 * Math.PI;
+        this.spin = (Math.random() - 0.5) * 0.1;
+        this.color = `hsl(${Math.floor(Math.random() * 360)}, 70%, 60%)`;
+      }
+      update() {
+        this.y += this.speed;
+        this.angle += this.spin;
+        if (this.y > confettiCanvas.height) {
+          this.y = -this.size;
+          this.x = Math.random() * confettiCanvas.width;
+        }
+      }
+      draw() {
+        confettiCtx.save();
+        confettiCtx.translate(this.x, this.y);
+        confettiCtx.rotate(this.angle);
+        confettiCtx.fillStyle = this.color;
+        confettiCtx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+        confettiCtx.restore();
+      }
     }
-  }
-  animate();
-}
 
-function loadWheel(options) {
-  segments = options;
-  segmentCount = segments.length;
-  segmentAngle = 2 * Math.PI / segmentCount;
-  startAngle = 0;
-  spinAngle = 0;
-  drawWheel();
-}
-
-// Pre-made wheels
-const presetWheels = {
-  fruits: ["Apple", "Banana", "Cherry", "Date", "Elderberry", "Fig", "Grape", "Honeydew"],
-  colors: ["Red", "Blue", "Green", "Yellow", "Purple", "Orange"],
-  party: ["Dance", "Sing", "Tell a joke", "Do 10 push-ups", "Share a secret", "High five"]
-};
-
-document.getElementById('loadWheel').addEventListener('click', () => {
-  const customText = document.getElementById('customOptions').value.trim();
-  if (customText) {
-    const options = customText.split(',').map(s => s.trim()).filter(s => s);
-    if (options.length < 2) {
-      alert('Please enter at least two options separated by commas.');
-      return;
+    let confettiParticles = [];
+    function startConfetti() {
+      confettiParticles = [];
+      for (let i = 0; i < 150; i++) {
+        confettiParticles.push(new ConfettiParticle());
+      }
+      confettiLoop();
     }
-    loadWheel(options);
-  } else {
-    alert('Please enter custom options or select a preset.');
-  }
-});
 
-document.getElementById('presetWheels').addEventListener('change', (e) => {
-  const val = e.target.value;
-  if (val && presetWheels[val]) {
-    loadWheel(presetWheels[val]);
-    document.getElementById('customOptions').value = '';
-  }
-});
+    function confettiLoop() {
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+      confettiParticles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      if (confettiParticles.length > 0) {
+        requestAnimationFrame(confettiLoop);
+      }
+    }
 
-document.getElementById('spin').addEventListener('click', spin);
+    function stopConfetti() {
+      confettiParticles = [];
+      confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+    }
 
-// Initial default wheel
-loadWheel(presetWheels['fruits']);
-</script>
+    // --- Wheel drawing function ---
+    function drawWheel() {
+      ctx.clearRect(0, 0, size, size);
 
+      for (let i = 0; i < segmentCount; i++) {
+        ctx.beginPath();
+        ctx.moveTo(center, center);
+        ctx.arc(center, center, center - 10, startAngle + i * segmentAngle, startAngle + (i + 1) * segmentAngle);
+        ctx.fillStyle = i % 2 === 0 ? '#FFCE54' : '#FC6E51';
+        ctx.fill();
+        ctx.strokeStyle = "#333";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        // Draw text on segment
+        ctx.save();
+        ctx.translate(center, center);
+        ctx.rotate(startAngle + i * segmentAngle + segmentAngle / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#000";
+        ctx.font = "bold 16px Arial";
+        ctx.fillText(segments[i], center - 20, 10);
+        ctx.restore();
+      }
+
+      // Center circle
+      ctx.beginPath();
+      ctx.arc(center, center, 30, 0, 2 * Math.PI);
+      ctx.fillStyle = "#FFF";
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = "#333";
+      ctx.stroke();
+
+      // Pointer
+      ctx.fillStyle = "red";
+      ctx.beginPath();
+      ctx.moveTo(center, 10);
+      ctx.lineTo(center - 15, 40);
+      ctx.lineTo(center + 15, 40);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // --- Spin logic ---
+    function spin() {
+      if (isSpinning || segmentCount === 0) return;
+
+      isSpinning = true;
+      spinSound.currentTime = 0;
+      spinSound.play();
+      spinVelocity = Math.random() * 0.3 + 0.4;
+
+      function animate() {
+        spinAngle += spinVelocity;
+        spinVelocity *= 0.97; // friction
+        startAngle = spinAngle % (2 * Math.PI);
+        drawWheel();
+
+        if (spinVelocity > 0.002) {
+          requestAnimationFrame(animate);
+        } else {
+          isSpinning = false;
+          winSound.currentTime = 0;
+          winSound.play();
+
+          // Calculate winning segment
+          const pointerAngle = (2 * Math.PI - startAngle + segmentAngle / 2) % (2 * Math.PI);
+          let selectedIndex = Math.floor(pointerAngle / segmentAngle);
+          selectedIndex = (segmentCount - 1 - selectedIndex + segmentCount) % segmentCount;
+
+        //   alert(`You got: ${segments[selectedIndex]}!`);
+
+          startConfetti();
+          setTimeout(stopConfetti, 4000);
+        }
+      }
+      animate();
+    }
+
+    // --- Load wheel with given options ---
+    function loadWheel(options) {
+      if (!options || options.length < 2) {
+        alert('Please provide at least two options.');
+        return;
+      }
+      segments = options;
+      segmentCount = segments.length;
+      segmentAngle = 2 * Math.PI / segmentCount;
+      startAngle = 0;
+      spinAngle = 0;
+      drawWheel();
+    }
+
+    // --- Event listeners ---
+
+    // When user selects a preset
+    presetSelect.addEventListener('change', (e) => {
+      const val = e.target.value;
+      if (val && presetWheels[val]) {
+        const options = presetWheels[val];
+        document.getElementById('customOptions').value = options.join(', ');
+        loadWheel(options);
+      }
+    });
+
+    // When user clicks load wheel (based on textarea)
+    document.getElementById('loadWheel').addEventListener('click', () => {
+      const customText = document.getElementById('customOptions').value.trim();
+      if (customText) {
+        const options = customText.split(',').map(s => s.trim()).filter(s => s);
+        if (options.length < 2) {
+          alert('Please enter at least two options separated by commas.');
+          return;
+        }
+        loadWheel(options);
+        presetSelect.value = "";
+      } else {
+        alert('Please enter custom options or select a preset.');
+      }
+    });
+
+    // Spin button
+    document.getElementById('spin').addEventListener('click', spin);
+
+    // Initial load (fruits)
+    loadWheel(presetWheels['fruits']);
+
+    // Resize confetti canvas on window resize
+    window.addEventListener('resize', () => {
+      confettiCanvas.width = window.innerWidth;
+      confettiCanvas.height = window.innerHeight;
+    });
+  </script>
+
+
+<footer style="margin-top: 40px; font-size: 14px; color: #666;">
+  <a href="privacy.html">Privacy Policy</a>
+</footer>
 </body>
 </html>
